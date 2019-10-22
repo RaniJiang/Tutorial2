@@ -9,6 +9,10 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+
 public class DetailActivity extends AppCompatActivity {
     ImageView articleImg;
     TextView articleTitle;
@@ -23,9 +27,21 @@ public class DetailActivity extends AppCompatActivity {
 
         //Get Intent Details and Parse in details
         Intent intent = getIntent();
-        int intentDetails = intent.getIntExtra("ID",0);
+        long intentDetails = intent.getIntExtra("ID",0);
+
         //Creating the Articles
-        Article article = FakeDatabase.getArticleById(intentDetails);
+        String api = FakeApi.getMostViewedStoriesJsonString();
+        Gson gson = new Gson();
+        NYTime nyTime = gson.fromJson(api, NYTime.class);
+
+        ArrayList<ViewedArticle> results = nyTime.getResults();
+        ViewedArticle article = results.get(0);
+        for (int x =0;x<results.size();x++){
+            if (results.get(x).getId() == intentDetails){
+                article = results.get(x);
+            }
+        }
+
 
         //Linking Xml Elements and Variables
         articleImg = findViewById(R.id.articleIv);
@@ -35,9 +51,9 @@ public class DetailActivity extends AppCompatActivity {
 
         //Setting the details
         //TODO article img
-        articleTitle.setText(article.getHeadline());
-        articleAuthor.setText(article.getAuthor());
-        articleContent.setText(article.getContent());
+        articleTitle.setText(article.getTitle());
+        articleAuthor.setText(article.getByline());
+        articleContent.setText(article.get_abstract());
 
         //Share Button Implicit Listener
         share = findViewById(R.id.shareBtn);

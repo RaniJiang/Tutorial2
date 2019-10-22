@@ -17,6 +17,7 @@ public class ViewedArticle
     private ArrayList media;
 
     public ViewedArticle() {
+
     }
 
     public ViewedArticle(long id, String title, String byline, String _abstract, String url, String publishedDate, ArrayList media) {

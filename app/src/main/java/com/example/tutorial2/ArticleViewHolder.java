@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
-import com.example.tutorial2.ArticleAdapter;
 
 public class ArticleViewHolder extends RecyclerView.ViewHolder{
     public View view;
