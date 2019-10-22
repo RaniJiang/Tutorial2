@@ -27,7 +27,7 @@ public class DetailActivity extends AppCompatActivity {
 
         //Get Intent Details and Parse in details
         Intent intent = getIntent();
-        long intentDetails = intent.getIntExtra("ID",0);
+        long intentDetails = intent.getLongExtra("ID",0);
 
         //Creating the Articles
         String api = FakeApi.getMostViewedStoriesJsonString();
@@ -39,6 +39,7 @@ public class DetailActivity extends AppCompatActivity {
         for (int x =0;x<results.size();x++){
             if (results.get(x).getId() == intentDetails){
                 article = results.get(x);
+                System.out.println("Hi");
             }
         }
 
