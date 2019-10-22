@@ -46,9 +46,6 @@ public class MainActivity extends AppCompatActivity {
                 transaction.replace(R.id.frameLayout, articlesFrag);
                 transaction.addToBackStack(null);
                 transaction.commit();
-//                view.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
-//                booksBtn.setDrawingCacheBackgroundColor(getResources().getColor(R.color.light));
-//                articlesbtn.setDrawingCacheBackgroundColor(getResources().getColor(R.color.light));
             }
         });
 

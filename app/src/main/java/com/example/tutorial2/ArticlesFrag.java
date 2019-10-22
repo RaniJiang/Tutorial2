@@ -12,6 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.Gson;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,6 +30,12 @@ public class ArticlesFrag extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_articles, container, false);
 
+        //Gson Conversion
+        String api = FakeApi.getMostViewedStoriesJsonString();
+        Gson gson = new Gson();
+        NYTime nyTime = gson.fromJson(api, NYTime.class);
+
+
 
         // Inflate the layout for this fragment
 
@@ -40,6 +48,7 @@ public class ArticlesFrag extends Fragment {
         ArticleAdapter articleAdapter = new ArticleAdapter();
         articleAdapter.setData(FakeDatabase.getAllArticles());
         recyclerView.setAdapter(articleAdapter);
+
 
         return view;
     }
