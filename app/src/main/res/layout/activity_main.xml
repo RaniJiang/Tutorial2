@@ -10,8 +10,8 @@
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="426dp"
-        android:layout_height="664dp"
+        android:layout_width="380dp"
+        android:layout_height="672dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

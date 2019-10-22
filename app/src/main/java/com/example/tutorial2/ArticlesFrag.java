@@ -35,10 +35,7 @@ public class ArticlesFrag extends Fragment {
         Gson gson = new Gson();
         NYTime nyTime = gson.fromJson(api, NYTime.class);
 
-
-
         // Inflate the layout for this fragment
-
         //Creating a RecyclerView
         recyclerView = view.findViewById(R.id.rv_main);
         layoutManager = new LinearLayoutManager(view.getContext());
@@ -46,7 +43,7 @@ public class ArticlesFrag extends Fragment {
 
         //Creating and using Custom Adapter
         ArticleAdapter articleAdapter = new ArticleAdapter();
-        articleAdapter.setData(FakeDatabase.getAllArticles());
+        articleAdapter.setData(nyTime.getResults());
         recyclerView.setAdapter(articleAdapter);
 
 

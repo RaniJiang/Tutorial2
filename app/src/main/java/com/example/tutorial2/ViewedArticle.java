@@ -2,6 +2,8 @@ package com.example.tutorial2;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
+
 public class ViewedArticle
 {
     private long id;
@@ -9,15 +11,22 @@ public class ViewedArticle
     private String byline;
     @SerializedName("abstract")
     private String _abstract;
+    private String url;
+    @SerializedName("published_date")
+    private String publishedDate;
+    private ArrayList media;
 
     public ViewedArticle() {
     }
 
-    public ViewedArticle(long id, String title, String byline, String _abstract) {
+    public ViewedArticle(long id, String title, String byline, String _abstract, String url, String publishedDate, ArrayList media) {
         this.id = id;
         this.title = title;
         this.byline = byline;
         this._abstract = _abstract;
+        this.url = url;
+        this.publishedDate = publishedDate;
+        this.media = media;
     }
 
     public long getId() {
@@ -50,5 +59,29 @@ public class ViewedArticle
 
     public void set_abstract(String _abstract) {
         this._abstract = _abstract;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getPublishedDate() {
+        return publishedDate;
+    }
+
+    public void setPublishedDate(String publishedDate) {
+        this.publishedDate = publishedDate;
+    }
+
+    public ArrayList getMedia() {
+        return media;
+    }
+
+    public void setMedia(ArrayList media) {
+        this.media = media;
     }
 }
