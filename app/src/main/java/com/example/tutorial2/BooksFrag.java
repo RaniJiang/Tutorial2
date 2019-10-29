@@ -37,15 +37,16 @@ public class BooksFrag extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_books, container, false);
 
         //Volley API
-        String url = "https://api.nytimes.com/svc/books/v3/lists.json";
+        String url = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=DCTNAA6QLfKcudy4YXSlGRruJTVu14Gv";
         RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
         Response.Listener<String> responseListener = new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                System.out.println(response);
+
                 //Gson Conversion
-                String api = response;
                 Gson gson = new Gson();
-                NYBooks nyBooks = gson.fromJson(api, NYBooks.class);
+                NYBooks nyBooks = gson.fromJson(response, NYBooks.class);
 
                 // Set the adapter
                 RecyclerView recyclerView = (RecyclerView) view;
@@ -55,6 +56,7 @@ public class BooksFrag extends Fragment {
         Response.ErrorListener errorListener = new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                System.out.println("GSON VOLLEY ERROR !");
 
             }
         };

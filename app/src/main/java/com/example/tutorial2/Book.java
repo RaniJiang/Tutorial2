@@ -1,31 +1,31 @@
 package com.example.tutorial2;
 
 public class Book {
-    public long id;
-    public String title;
     public String author;
     public String description;
     public int price;
+    public String primary_isbn10;
     public String publisher;
+    public String title;
 
     public Book() {
     }
 
-    public Book(long id, String title, String author, String description, int price, String publisher) {
-        this.id = id;
-        this.title = title;
+    public Book(String author, String description, int price, String primary_isbn10, String publisher, String title) {
         this.author = author;
         this.description = description;
         this.price = price;
+        this.primary_isbn10 = primary_isbn10;
         this.publisher = publisher;
+        this.title = title;
     }
 
-    public long getId() {
-        return id;
+    public String getId() {
+        return primary_isbn10;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setId(String id) {
+        this.primary_isbn10 = id;
     }
 
     public String getTitle() {
