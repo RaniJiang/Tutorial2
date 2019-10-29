@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     FragmentTransaction fragmentTransaction;
     ArticlesFrag articlesFrag;
     ProfileFrag profileFrag;
+    BooksFrag booksFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
         //Declare Frags
         articlesFrag = new ArticlesFrag();
         profileFrag = new ProfileFrag();
+        booksFrag = new BooksFrag();
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
@@ -53,6 +55,16 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view){
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 transaction.replace(R.id.frameLayout, profileFrag);
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+        booksBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.frameLayout, booksFrag);
                 transaction.addToBackStack(null);
                 transaction.commit();
             }
