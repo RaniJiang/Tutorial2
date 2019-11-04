@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
@@ -23,7 +24,8 @@ import java.util.ArrayList;
 
 public class BooksFrag extends Fragment {
 
-    ArrayList<Book> books;
+    //ArrayList<Book> books;
+    RecyclerView.LayoutManager layoutManager;
 
     public BooksFrag() {
         // Required empty public constructor
@@ -31,7 +33,7 @@ public class BooksFrag extends Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_books, container, false);
@@ -48,9 +50,14 @@ public class BooksFrag extends Fragment {
                 Gson gson = new Gson();
                 NYBooks nyBooks = gson.fromJson(response, NYBooks.class);
 
+
+                RecyclerView recyclerView = view.findViewById(R.id.rv_books);
+
                 // Set the adapter
-                RecyclerView recyclerView = (RecyclerView) view;
-                recyclerView.setAdapter(new BookAdapter(nyBooks.getResults()));
+                recyclerView = view.findViewById(R.id.rv_books);
+                layoutManager = new LinearLayoutManager(view.getContext());
+                recyclerView.setLayoutManager(layoutManager);
+                recyclerView.setAdapter(new BookAdapter(nyBooks.getResults().getBooks()));
             }
         };
         Response.ErrorListener errorListener = new Response.ErrorListener() {

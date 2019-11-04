@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
-        ArrayList<Book> books;
+    ArrayList<Book> books;
 
     public BookAdapter(ArrayList<Book> books) {
         this.books = books;
