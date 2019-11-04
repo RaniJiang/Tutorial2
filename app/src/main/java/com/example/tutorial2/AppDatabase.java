@@ -22,12 +22,11 @@ import com.example.tutorial2.Book;  // CHANGE ME
  * ... etc (whatever methods you defined in your Dao).
  */
 
+//Annotate with @Database, and specify all entities
 @Database(entities = {Book.class}, version = 1)
-// Replace "Book.class" with whatever your Book entity class is.
-
 public abstract class AppDatabase extends RoomDatabase {
-    //public abstract BookDao bookDao();          // Replace BookDao with whatever you name your DAO
 
+    public abstract BookDao bookDao();
     private static AppDatabase instance;
 
     public static AppDatabase getInstance(Context context) {
