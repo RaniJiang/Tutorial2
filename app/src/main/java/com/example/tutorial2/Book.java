@@ -1,13 +1,24 @@
 package com.example.tutorial2;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity(tableName = "BOOK")
 public class Book {
     public String author;
     public String description;
     public int price;
+    @PrimaryKey
+    @NonNull
+    @ColumnInfo(name = "isbn")
     public String primary_isbn10;
     public String publisher;
     public String title;
+    //@Ignore can be used if variable too complex e.g. an array
 
+    //No Arguments Constructor is Important for Room
     public Book() {
     }
 
