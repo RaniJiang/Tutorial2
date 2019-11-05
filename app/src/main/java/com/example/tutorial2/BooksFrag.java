@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BooksFrag extends Fragment {
 
@@ -49,15 +50,22 @@ public class BooksFrag extends Fragment {
                 //Gson Conversion
                 Gson gson = new Gson();
                 NYBooks nyBooks = gson.fromJson(response, NYBooks.class);
-
-
                 RecyclerView recyclerView = view.findViewById(R.id.rv_books);
+
+                //Get Book Array Created by GSON
+                ArrayList<Book> books = nyBooks.getResults().getBooks();
+                //Pass this Array into Database
+                AppDatabase appDatabase = AppDatabase.getInstance(view.getContext());
+                BookDao bookDao = appDatabase.bookDao();
+                bookDao.insert(books);
+                //Get From Database BookList
+                ArrayList<Book> dbBooks =(ArrayList<Book>) bookDao.getBooks();
 
                 // Set the adapter
                 recyclerView = view.findViewById(R.id.rv_books);
                 layoutManager = new LinearLayoutManager(view.getContext());
                 recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(new BookAdapter(nyBooks.getResults().getBooks()));
+                recyclerView.setAdapter(new BookAdapter(dbBooks));
             }
         };
         Response.ErrorListener errorListener = new Response.ErrorListener() {

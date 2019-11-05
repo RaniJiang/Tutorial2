@@ -1,16 +1,25 @@
 package com.example.tutorial2;
 
+import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
+import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
 import java.util.ArrayList;
+import java.util.List;
 
+@Dao
 public interface BookDao {
 
-    @Insert
+    //Conflict Strategy - Room
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    //... -> can be 1 or an array of thing - only works for array, not list or arraylist
     public void insert(Book...BOOK);
+
+    @Insert (onConflict = OnConflictStrategy.REPLACE)
+    public void insert(ArrayList<Book> booksArrayList);
 
     @Update
     public void update(Book...BOOK);
@@ -19,11 +28,14 @@ public interface BookDao {
     public void delete(Book BOOK);
 
     @Query("SELECT * FROM BOOK")
-    public ArrayList<Book> getBooks();
+    //the thing below is what java sees
+    public List<Book> getBooks();
 
     @Query("SELECT * FROM BOOK WHERE price >= 10")
-    public ArrayList<Book> getExpensiveBooks();
+    public List<Book> getExpensiveBooks();
 
+    @Insert
+    public void insertBookList (ArrayList<Book> book);
 
 
 }
