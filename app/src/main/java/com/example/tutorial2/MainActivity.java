@@ -9,12 +9,12 @@ import android.view.View;
 import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
-    //Create xml view links
+    //Declare xml view links
     ImageButton articlesbtn;
     ImageButton booksBtn;
     ImageButton profileBtn;
 
-    //Create Frag links
+    //Declare Frag links
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     ArticlesFrag articlesFrag;
@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Declare Frags
+        //Initialise Frags
         articlesFrag = new ArticlesFrag();
         profileFrag = new ProfileFrag();
         booksFrag = new BooksFrag();
@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.frameLayout, articlesFrag);
         fragmentTransaction.commit();
 
-        //Declare Views
+        //Initialise Views
         articlesbtn = findViewById(R.id.articlesBtn);
         booksBtn = findViewById(R.id.booksBtn);
         profileBtn = findViewById(R.id.profileBtn);
