@@ -1,5 +1,6 @@
 package com.example.tutorial2;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,11 +11,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 
     ArrayList<Book> books;
+    Context context;
 
     public BookAdapter(ArrayList<Book> books) {
         this.books = books;
@@ -23,6 +27,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
         public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.book, parent, false);
+            this.context = parent.getContext();
             BookViewHolder bookViewHolder = new BookViewHolder(view);
             return bookViewHolder;
 
@@ -34,6 +39,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             holder.titleTv.setText(bookAtPosition.getTitle());
             holder.authorTv.setText(bookAtPosition.getAuthor());
             holder.synopsisTv.setText(bookAtPosition.getDescription());
+            Glide.with(context).load(bookAtPosition.getBook_image()).into(holder.bookImage);
 
             holder.bookll.setOnClickListener(new View.OnClickListener(){
                 @Override
