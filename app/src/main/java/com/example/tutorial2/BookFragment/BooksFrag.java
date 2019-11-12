@@ -18,19 +18,28 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.tutorial2.database.AppDatabase;
+import com.example.tutorial2.database.AsyncTaskDelegate;
+import com.example.tutorial2.database.InsertBooksAsyncTask;
 import com.example.tutorial2.model.Book;
 import com.example.tutorial2.database.BookDao;
 import com.example.tutorial2.model.NYBooks;
 import com.example.tutorial2.R;
 import com.google.gson.Gson;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
-public class BooksFrag extends Fragment {
+public class BooksFrag extends Fragment implements AsyncTaskDelegate {
+
+    View view;
 
     //ArrayList<Book> books;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView recyclerView;
+
+    //Database Books
+    ArrayList<Book>dbBooks;
 
     public BooksFrag() {
         // Required empty public constructor
@@ -41,9 +50,10 @@ public class BooksFrag extends Fragment {
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_books, container, false);
+        view = inflater.inflate(R.layout.fragment_books, container, false);
+        final BooksFrag thisFragment = this;
 
-        //Volley API
+        //Volley API - takes care of threading as well
         String url = "https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=DCTNAA6QLfKcudy4YXSlGRruJTVu14Gv";
         RequestQueue requestQueue = Volley.newRequestQueue(view.getContext());
         Response.Listener<String> responseListener = new Response.Listener<String>() {
@@ -51,24 +61,22 @@ public class BooksFrag extends Fragment {
             public void onResponse(String response) {
                 System.out.println(response);
 
-                //Gson Conversion
+                //Gson Conversion - not big enough for asynctasks
                 Gson gson = new Gson();
                 NYBooks nyBooks = gson.fromJson(response, NYBooks.class);
-
-                //Get Book Array Created by GSON
-                ArrayList<Book> books = nyBooks.getResults().getBooks();
-                //Pass this Array into Database
+                ArrayList<Book> booksGson = nyBooks.getResults().getBooks();
+                Book[] books = new Book[booksGson.size()];
+                booksGson.toArray(books);
                 AppDatabase appDatabase = AppDatabase.getInstance(view.getContext());
-                BookDao bookDao = appDatabase.bookDao();
-                bookDao.insert(books);
-                //Get From Database BookList
-                ArrayList<Book> dbBooks =(ArrayList<Book>) bookDao.getBooks();
 
-                // Set the adapter
-                recyclerView = view.findViewById(R.id.rv_books);
-                layoutManager = new LinearLayoutManager(view.getContext());
-                recyclerView.setLayoutManager(layoutManager);
-                recyclerView.setAdapter(new BookAdapter(dbBooks));
+                //Async Task
+                InsertBooksAsyncTask insertBooksAsyncTask = new InsertBooksAsyncTask();
+                insertBooksAsyncTask.setDatabase(appDatabase);
+                insertBooksAsyncTask.setDelegate(thisFragment);
+
+                insertBooksAsyncTask.execute(books);
+
+
             }
         };
         Response.ErrorListener errorListener = new Response.ErrorListener() {
@@ -86,8 +94,17 @@ public class BooksFrag extends Fragment {
         return view;
     }
 
+    @Override
+    public void handleTaskResult(ArrayList<Book> books){
+        // Set the adapter
+        dbBooks = books;
+        recyclerView = view.findViewById(R.id.rv_books);
+        layoutManager = new LinearLayoutManager(view.getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(new BookAdapter(dbBooks));
+    }
 
-
-
-
+    public void handleTaskResult(String result){
+        System.out.println("Result of Get: " +result);
+    }
 }

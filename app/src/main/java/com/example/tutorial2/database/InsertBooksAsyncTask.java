@@ -3,9 +3,13 @@ package com.example.tutorial2.database;
 import android.os.AsyncTask;
 
 import com.example.tutorial2.model.Book;
+import com.example.tutorial2.model.NYBooks;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
 
 
-public class InsertBooksAsyncTask extends AsyncTask<Book, Integer, String> {
+public class InsertBooksAsyncTask extends AsyncTask<Book, Integer, ArrayList<Book>> {
     // This is just a scaffold example for a task that would handle inserting books into the database.
     // You need to complete the doInBackground and onPostExecute methods.
     // Then you will need to make your own class for a task that handles retrieving Books from the
@@ -29,22 +33,25 @@ public class InsertBooksAsyncTask extends AsyncTask<Book, Integer, String> {
     }
 
     @Override
-    protected String doInBackground(Book... books) {
+    protected ArrayList<Book> doInBackground(Book... books) {
         // Do some task here that would take a long time... for example, database queries
         // Also note: Book... books.
         //                  ^ the ... notation means it accepts either a single book or an array (or nothing).
-
-        // TODO: Write your code to perform the task
-
         // When the task is finished, it will return.
         // You would normally want to return the result of your task.
         // For example, if my task was to get books from DB, I would make this method return the list
         // of books. The return value goes straight to onPostExecute.
-        return "This value will be passed to onPostExecute as the result parameter.";
+
+        //Get Book Array Created by GSON
+        BookDao bookDao = database.bookDao();
+        bookDao.insert(books);
+        //Sometimes would not want to get books - two large query
+        return (ArrayList<Book>) bookDao.getBooks();
+
     }
 
     @Override
-    protected void onPostExecute(String result) {
+    protected void onPostExecute(ArrayList<Book> result) {
         // Once doInBackground is completed, this method will run.
         // The "result" comes from doInBackground.
 
@@ -52,6 +59,7 @@ public class InsertBooksAsyncTask extends AsyncTask<Book, Integer, String> {
         // Our delegate should be the original Fragment/Activity, so then it can use the result to
         // update the UI, for example.
 
-        // TODO: Call the delegate's method with the results
+        delegate.handleTaskResult(result);
+
     }
 }
