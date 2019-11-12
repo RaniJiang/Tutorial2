@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.example.tutorial2.ArticleFragment.ArticlesFrag;
+import com.example.tutorial2.BookFragment.BooksFrag;
+
 public class MainActivity extends AppCompatActivity {
     //Declare xml view links
     ImageButton articlesbtn;

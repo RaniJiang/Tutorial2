@@ -1,13 +1,16 @@
-package com.example.tutorial2;
+package com.example.tutorial2.ArticleFragment;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.tutorial2.DetailActivity;
+import com.example.tutorial2.R;
+import com.example.tutorial2.model.ViewedArticle;
 
 import java.util.ArrayList;
 

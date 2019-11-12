@@ -1,4 +1,4 @@
-package com.example.tutorial2;
+package com.example.tutorial2.model;
 
 import java.util.ArrayList;
 

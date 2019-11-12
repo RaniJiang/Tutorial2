@@ -1,7 +1,6 @@
-package com.example.tutorial2;
+package com.example.tutorial2.ArticleFragment;
 
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.tutorial2.model.FakeApi;
+import com.example.tutorial2.model.NYTime;
+import com.example.tutorial2.R;
 import com.google.gson.Gson;
 
 

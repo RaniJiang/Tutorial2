@@ -1,6 +1,4 @@
-package com.example.tutorial2;
-
-import java.util.ArrayList;
+package com.example.tutorial2.model;
 
 public class NYBooks {
     public BookMeta results;

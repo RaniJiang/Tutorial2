@@ -1,4 +1,4 @@
-package com.example.tutorial2;
+package com.example.tutorial2.database;
 
 import android.content.Context;
 
@@ -6,7 +6,9 @@ import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
+import com.example.tutorial2.model.Book;
 import com.example.tutorial2.Book;  // CHANGE ME
+
 
 /**
  * Refer to: https://developer.android.com/training/data-storage/room/index.html

@@ -1,7 +1,6 @@
-package com.example.tutorial2;
+package com.example.tutorial2.BookFragment;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -18,15 +17,20 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.tutorial2.database.AppDatabase;
+import com.example.tutorial2.model.Book;
+import com.example.tutorial2.database.BookDao;
+import com.example.tutorial2.model.NYBooks;
+import com.example.tutorial2.R;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class BooksFrag extends Fragment {
 
     //ArrayList<Book> books;
     RecyclerView.LayoutManager layoutManager;
+    RecyclerView recyclerView;
 
     public BooksFrag() {
         // Required empty public constructor
@@ -50,7 +54,6 @@ public class BooksFrag extends Fragment {
                 //Gson Conversion
                 Gson gson = new Gson();
                 NYBooks nyBooks = gson.fromJson(response, NYBooks.class);
-                RecyclerView recyclerView = view.findViewById(R.id.rv_books);
 
                 //Get Book Array Created by GSON
                 ArrayList<Book> books = nyBooks.getResults().getBooks();

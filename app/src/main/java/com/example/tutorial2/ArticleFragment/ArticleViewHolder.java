@@ -1,4 +1,4 @@
-package com.example.tutorial2;
+package com.example.tutorial2.ArticleFragment;
 
 import android.view.View;
 import android.widget.Button;
@@ -6,6 +6,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.tutorial2.R;
 
 public class ArticleViewHolder extends RecyclerView.ViewHolder{
     public View view;

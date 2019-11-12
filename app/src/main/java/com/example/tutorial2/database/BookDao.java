@@ -1,4 +1,4 @@
-package com.example.tutorial2;
+package com.example.tutorial2.database;
 
 import androidx.room.Dao;
 import androidx.room.Delete;
@@ -6,6 +6,8 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
+
+import com.example.tutorial2.model.Book;
 
 import java.util.ArrayList;
 import java.util.List;

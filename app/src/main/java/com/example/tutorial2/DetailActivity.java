@@ -9,6 +9,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.tutorial2.model.FakeApi;
+import com.example.tutorial2.model.NYTime;
+import com.example.tutorial2.model.ViewedArticle;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
