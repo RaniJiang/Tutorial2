@@ -3,9 +3,6 @@ package com.example.tutorial2.database;
 import android.os.AsyncTask;
 
 import com.example.tutorial2.model.Book;
-import com.example.tutorial2.model.NYBooks;
-import com.google.gson.Gson;
-
 import java.util.ArrayList;
 
 
