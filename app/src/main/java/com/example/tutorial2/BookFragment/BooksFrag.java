@@ -34,7 +34,6 @@ public class BooksFrag extends Fragment implements AsyncTaskDelegate {
 
     View view;
 
-    //ArrayList<Book> books;
     RecyclerView.LayoutManager layoutManager;
     RecyclerView recyclerView;
 
@@ -44,7 +43,6 @@ public class BooksFrag extends Fragment implements AsyncTaskDelegate {
     public BooksFrag() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
@@ -67,6 +65,7 @@ public class BooksFrag extends Fragment implements AsyncTaskDelegate {
                 ArrayList<Book> booksGson = nyBooks.getResults().getBooks();
                 Book[] books = new Book[booksGson.size()];
                 booksGson.toArray(books);
+
                 AppDatabase appDatabase = AppDatabase.getInstance(view.getContext());
 
                 //Async Task
